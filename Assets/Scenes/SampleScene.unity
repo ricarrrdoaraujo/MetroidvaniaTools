@@ -686,9 +686,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFacingLeft: 0
   isGrounded: 0
+  limitAirJumps: 1
   maxJumps: 3
   jumpForce: 250
   distanceToCollider: 0.05
+  maxJumpSpeed: 10
+  maxFallSpeed: -10
+  acceptedFallSpeed: -5
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256

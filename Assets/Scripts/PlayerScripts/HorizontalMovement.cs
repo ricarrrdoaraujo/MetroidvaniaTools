@@ -54,6 +54,7 @@ namespace MetroidvaniaTools
                 runTime = 0;
                 currentSpeed = 0;
             }
+            rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
         }
 
         protected virtual void CheckDirection()

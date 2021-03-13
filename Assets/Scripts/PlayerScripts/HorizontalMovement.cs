@@ -8,6 +8,7 @@ namespace MetroidvaniaTools
     {
         [SerializeField] protected float timeTillMaxSpeed;
         [SerializeField] protected float maxSpeed;
+        [SerializeField] protected float sprintMultiplier;
         private float acceleration;
         private float currentSpeed;
         private float horizontalInput;
@@ -21,6 +22,7 @@ namespace MetroidvaniaTools
         protected virtual void Update()
         {
             MovementPressed();
+            SprintingHeld();
         }
 
         protected virtual bool MovementPressed()
@@ -28,6 +30,16 @@ namespace MetroidvaniaTools
             if (Input.GetAxis("Horizontal") != 0)
             {
                 horizontalInput = Input.GetAxis("Horizontal");
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        protected virtual bool SprintingHeld()
+        {
+            if (Input.GetKey((KeyCode.LeftShift)))
+            {
                 return true;
             }
             else
@@ -54,20 +66,46 @@ namespace MetroidvaniaTools
                 runTime = 0;
                 currentSpeed = 0;
             }
+
+            SpeedMultiplier();
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
         }
 
         protected virtual void CheckDirection()
         {
-            if (currentSpeed > maxSpeed)
+            if (currentSpeed > 0)
             {
-                currentSpeed = maxSpeed;
+                if (character.isFacingLeft)
+                {
+                    character.isFacingLeft = false;
+                    Flip();
+                }
+                if (currentSpeed > maxSpeed)
+                {
+                    currentSpeed = maxSpeed;
+                }
             }
-            if (currentSpeed <  -maxSpeed)
+
+            if (currentSpeed < 0)
             {
-                currentSpeed = -maxSpeed;
+                if (!character.isFacingLeft)
+                {
+                    character.isFacingLeft = true;
+                    Flip();
+                }
+                if (currentSpeed <  -maxSpeed)
+                {
+                    currentSpeed = -maxSpeed;
+                }
             }
-            
+        }
+
+        protected virtual void SpeedMultiplier()
+        {
+            if (SprintingHeld())
+            {
+                currentSpeed *= sprintMultiplier;
+            }
         }
     }
 }

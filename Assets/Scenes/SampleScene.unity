@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899ac5bcddb15ba44ab5ad586d66e5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFacingLeft: 0
 --- !u!50 &1863711260
 Rigidbody2D:
   serializedVersion: 4
@@ -555,5 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5b005fa19362a4885146f40567c9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFacingLeft: 0
   timeTillMaxSpeed: 0.75
   maxSpeed: 6
+  sprintMultiplier: 2

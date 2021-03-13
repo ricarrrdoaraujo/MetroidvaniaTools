@@ -7,12 +7,20 @@ namespace MetroidvaniaTools
 {
     public class Jump : Abilities
     {
+        [SerializeField] protected int maxJumps;
         [SerializeField] protected float jumpForce;
         [SerializeField] protected float distanceToCollider;
         [SerializeField] private LayerMask collisionLayer;
 
         private bool isJumping;
-        
+        private int numberOfJumpsLeft;
+
+        protected override void Initialization()
+        {
+            base.Initialization();
+            numberOfJumpsLeft = maxJumps;
+        }
+
         protected virtual void Update()
         {
             JumpPressed();
@@ -22,7 +30,16 @@ namespace MetroidvaniaTools
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isJumping = true;
+                if (!character.isGrounded && numberOfJumpsLeft == maxJumps)
+                {
+                    isJumping = false;
+                    return false;
+                }
+                numberOfJumpsLeft--;
+                if (numberOfJumpsLeft >= 0)
+                {
+                    isJumping = true;
+                }
                 return true;
             }
             else
@@ -37,21 +54,21 @@ namespace MetroidvaniaTools
 
         protected virtual void GroundCheck()
         {
-            if (CollisionCheck(Vector2.down, distanceToCollider, collisionLayer))
+            if (CollisionCheck(Vector2.down, distanceToCollider, collisionLayer) && !isJumping)
             {
                 character.isGrounded = true;
+                numberOfJumpsLeft = maxJumps;
             }
             else
+            {
                 character.isGrounded = false;
+                isJumping = false;
+            }
+                
         }
 
         protected virtual void IsJumping()
         {
-            if (!character.isGrounded)
-            {
-                isJumping = false;
-                return;
-            }
             if (isJumping)
             {
                 rb.AddForce(Vector2.up * jumpForce);

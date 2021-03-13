@@ -10,6 +10,8 @@ namespace MetroidvaniaTools
         [SerializeField] protected bool limitAirJumps;
         [SerializeField] protected int maxJumps;
         [SerializeField] protected float jumpForce;
+        [SerializeField] protected float holdForce;
+        [SerializeField] protected float buttonHoldTime;
         [SerializeField] protected float distanceToCollider;
         [SerializeField] protected float maxJumpSpeed;
         [SerializeField] protected float maxFallSpeed;
@@ -17,17 +19,20 @@ namespace MetroidvaniaTools
         [SerializeField] private LayerMask collisionLayer;
 
         private bool isJumping;
+        private float jumpCountDown;
         private int numberOfJumpsLeft;
 
         protected override void Initialization()
         {
             base.Initialization();
             numberOfJumpsLeft = maxJumps;
+            jumpCountDown = buttonHoldTime;
         }
 
         protected virtual void Update()
         {
             JumpPressed();
+            JumpHeld();
         }
 
         protected virtual bool JumpPressed()
@@ -48,8 +53,19 @@ namespace MetroidvaniaTools
                 numberOfJumpsLeft--;
                 if (numberOfJumpsLeft >= 0)
                 {
+                    jumpCountDown = buttonHoldTime;
                     isJumping = true;
                 }
+                return true;
+            }
+            else
+                return false;
+        }
+
+        protected virtual bool JumpHeld()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
                 return true;
             }
             else
@@ -72,7 +88,6 @@ namespace MetroidvaniaTools
             else
             {
                 character.isGrounded = false;
-                isJumping = false;
                 if (Falling(0) && rb.velocity.y < maxFallSpeed)
                 { 
                     rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
@@ -96,12 +111,31 @@ namespace MetroidvaniaTools
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce);
+
+                AdditionalAir();
             }
 
             if (rb.velocity.y > maxJumpSpeed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, maxJumpSpeed);
             }
+        }
+
+        protected virtual void AdditionalAir()
+        {
+            if (JumpHeld())
+            {
+                jumpCountDown -= Time.deltaTime;
+                if (jumpCountDown <= 0)
+                {
+                    jumpCountDown = 0;
+                    isJumping = false;
+                }
+                else
+                    rb.AddForce(Vector2.up * holdForce);
+            }
+            else
+                isJumping = false;
         }
     }
 }

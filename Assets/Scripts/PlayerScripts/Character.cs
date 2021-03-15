@@ -14,6 +14,7 @@ namespace MetroidvaniaTools
         
         protected Collider2D col;
         protected Rigidbody2D rb;
+        protected Animator anim;
 
         private Vector2 facingLeft;
         void Start()
@@ -25,6 +26,7 @@ namespace MetroidvaniaTools
         {
             col = GetComponent<Collider2D>();
             rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
 

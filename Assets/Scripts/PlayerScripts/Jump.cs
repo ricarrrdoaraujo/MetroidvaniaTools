@@ -53,6 +53,7 @@ namespace MetroidvaniaTools
                 numberOfJumpsLeft--;
                 if (numberOfJumpsLeft >= 0)
                 {
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
                     jumpCountDown = buttonHoldTime;
                     isJumping = true;
                 }
@@ -82,17 +83,20 @@ namespace MetroidvaniaTools
         {
             if (CollisionCheck(Vector2.down, distanceToCollider, collisionLayer) && !isJumping)
             {
+                anim.SetBool("Grounded", true);
                 character.isGrounded = true;
                 numberOfJumpsLeft = maxJumps;
             }
             else
             {
+                anim.SetBool("Grounded", false);
                 character.isGrounded = false;
                 if (Falling(0) && rb.velocity.y < maxFallSpeed)
                 { 
                     rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
                 }
             }
+            anim.SetFloat("VerticalSpeed", rb.velocity.y);
         }
 
         protected virtual bool Falling(float velocity)
@@ -109,7 +113,6 @@ namespace MetroidvaniaTools
         {
             if (isJumping)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce);
 
                 AdditionalAir();

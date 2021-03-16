@@ -106,8 +106,11 @@ namespace MetroidvaniaTools
         {
             if (SprintingHeld())
             {
+                anim.SetBool("Sprinting", true);
                 currentSpeed *= sprintMultiplier;
             }
+            else
+                anim.SetBool("Sprinting", false);
         }
     }
 }

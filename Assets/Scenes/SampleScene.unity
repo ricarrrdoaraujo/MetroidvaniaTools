@@ -451,16 +451,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: gravity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: maxJumps
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: glideTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: holdForce
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: jumpForce
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: maxFallSpeed
@@ -583,8 +591,20 @@ PrefabInstance:
       value: 0.99623346
       objectReference: {fileID: 0}
     - target: {fileID: 2180374217911591178, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180374217911591178, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180374217911591178, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.08671178
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180374217911591178, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -3.659
       objectReference: {fileID: 0}
     - target: {fileID: 2320274932645913691, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -628,7 +648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3343879588783714249, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 40.401
+      value: 23.422
       objectReference: {fileID: 0}
     - target: {fileID: 3620572198654796448, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: m_LocalRotation.w

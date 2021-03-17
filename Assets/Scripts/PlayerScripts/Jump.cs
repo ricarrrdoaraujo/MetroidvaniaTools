@@ -16,10 +16,13 @@ namespace MetroidvaniaTools
         [SerializeField] protected float maxJumpSpeed;
         [SerializeField] protected float maxFallSpeed;
         [SerializeField] protected float acceptedFallSpeed;
+        [SerializeField] protected float glideTime;
+        [SerializeField] [Range(-2, 2)] protected float gravity;
         [SerializeField] private LayerMask collisionLayer;
 
         private bool isJumping;
         private float jumpCountDown;
+        private float fallCountDown;
         private int numberOfJumpsLeft;
 
         protected override void Initialization()
@@ -27,6 +30,7 @@ namespace MetroidvaniaTools
             base.Initialization();
             numberOfJumpsLeft = maxJumps;
             jumpCountDown = buttonHoldTime;
+            fallCountDown = glideTime;
         }
 
         protected virtual void Update()
@@ -56,6 +60,7 @@ namespace MetroidvaniaTools
                     rb.velocity = new Vector2(rb.velocity.x, 0);
                     jumpCountDown = buttonHoldTime;
                     isJumping = true;
+                    fallCountDown = glideTime;
                 }
                 return true;
             }
@@ -76,6 +81,7 @@ namespace MetroidvaniaTools
         protected void FixedUpdate()
         {
             IsJumping();
+            Gliding();
             GroundCheck();
         }
 
@@ -86,6 +92,7 @@ namespace MetroidvaniaTools
                 anim.SetBool("Grounded", true);
                 character.isGrounded = true;
                 numberOfJumpsLeft = maxJumps;
+                fallCountDown = glideTime;
             }
             else
             {
@@ -109,6 +116,11 @@ namespace MetroidvaniaTools
                 return false;
         }
 
+        protected virtual void FallSpeed(float speed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, (rb.velocity.y * speed));
+        }
+
         protected virtual void IsJumping()
         {
             if (isJumping)
@@ -122,6 +134,21 @@ namespace MetroidvaniaTools
             {
                 rb.velocity = new Vector2(rb.velocity.x, maxJumpSpeed);
             }
+        }
+
+        protected virtual void Gliding()
+        {
+            if (Falling(0) && JumpHeld())
+            {
+                fallCountDown -= Time.deltaTime;
+                if (fallCountDown > 0 && rb.velocity.y > acceptedFallSpeed)
+                {
+                    anim.SetBool("Gliding", true);
+                    FallSpeed(gravity);
+                    return;
+                }
+            }
+            anim.SetBool("Gliding", false);
         }
 
         protected virtual void AdditionalAir()

@@ -9,6 +9,7 @@ namespace MetroidvaniaTools
         [SerializeField] protected float timeTillMaxSpeed;
         [SerializeField] protected float maxSpeed;
         [SerializeField] protected float sprintMultiplier;
+        [SerializeField] protected float crouchSpeedMultiplier;
         private float acceleration;
         private float currentSpeed;
         private float horizontalInput;
@@ -108,6 +109,10 @@ namespace MetroidvaniaTools
             if (SprintingHeld())
             {
                 currentSpeed *= sprintMultiplier;
+            }
+            else if (character.isCrouching)
+            {
+                currentSpeed *= crouchSpeedMultiplier;
             }
         }
     }

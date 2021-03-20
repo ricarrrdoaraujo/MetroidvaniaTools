@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace MetroidvaniaTools
 {
+    [RequireComponent (typeof (CapsuleCollider2D))]
     public class Dash : Abilities
     {
         [SerializeField] protected float dashForce;
@@ -13,6 +15,18 @@ namespace MetroidvaniaTools
 
         private bool canDash;
         private float dashCountDown;
+        private CapsuleCollider2D capsuleCollider2D;
+        private Vector2 originalCollider;
+        private Vector2 dashCollider;
+
+        protected override void Initialization()
+        {
+            base.Initialization();
+            capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+            originalCollider = capsuleCollider2D.size;
+            // invert collider on dash
+            dashCollider = new Vector2(capsuleCollider2D.size.y, capsuleCollider2D.size.x);
+        }
 
         protected virtual void Update()
         {
@@ -32,8 +46,11 @@ namespace MetroidvaniaTools
 
         protected virtual void Dashing()
         {
+            anim.SetBool("Dashing", true);
             dashCountDown = dashCoolDownTime;
             character.isDashing = true;
+            capsuleCollider2D.direction = CapsuleDirection2D.Horizontal;
+            capsuleCollider2D.size = dashCollider;
             StartCoroutine(FinishedDashing());
         }
 
@@ -97,7 +114,9 @@ namespace MetroidvaniaTools
             FallSpeed(1);
             movement.enabled = true;
             rb.velocity = new Vector2(0, rb.velocity.y);
-            
+            capsuleCollider2D.direction = CapsuleDirection2D.Vertical;
+            capsuleCollider2D.size = originalCollider;
+            anim.SetBool("Dashing", false);
         }
 
         protected virtual IEnumerator TurnColliderBackOn(GameObject obj)

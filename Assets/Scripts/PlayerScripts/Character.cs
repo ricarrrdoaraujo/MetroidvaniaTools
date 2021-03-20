@@ -13,10 +13,13 @@ namespace MetroidvaniaTools
         public bool isGrounded;
         [HideInInspector]
         public bool isCrouching;
+        [HideInInspector]
+        public bool isDashing;
         
         protected Collider2D col;
         protected Rigidbody2D rb;
         protected Animator anim;
+        protected HorizontalMovement movement;
 
         private Vector2 facingLeft;
         void Start()
@@ -29,6 +32,7 @@ namespace MetroidvaniaTools
             col = GetComponent<Collider2D>();
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
+            movement = GetComponent<HorizontalMovement>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
 
@@ -56,6 +60,11 @@ namespace MetroidvaniaTools
                 }
             }
             return false;
+        }
+        
+        protected virtual void FallSpeed(float speed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, (rb.velocity.y * speed));
         }
         
     }

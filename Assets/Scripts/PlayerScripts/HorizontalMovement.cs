@@ -26,7 +26,7 @@ namespace MetroidvaniaTools
             SprintingHeld();
         }
 
-        protected virtual bool MovementPressed()
+        public virtual bool MovementPressed()
         {
             if (Input.GetAxis("Horizontal") != 0)
             {

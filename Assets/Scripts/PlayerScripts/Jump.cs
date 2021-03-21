@@ -83,6 +83,7 @@ namespace MetroidvaniaTools
             IsJumping();
             Gliding();
             GroundCheck();
+            WallSliding();
         }
 
         protected virtual void GroundCheck()
@@ -104,6 +105,30 @@ namespace MetroidvaniaTools
                 }
             }
             anim.SetFloat("VerticalSpeed", rb.velocity.y);
+        }
+
+        protected virtual bool WallCheck()
+        {
+            if ((!character.isFacingLeft && CollisionCheck(Vector2.right, distanceToCollider, collisionLayer)
+                 || character.isFacingLeft && CollisionCheck(Vector2.left, distanceToCollider, collisionLayer))
+                && movement.MovementPressed() && !character.isGrounded)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        protected virtual bool WallSliding()
+        {
+            if (WallCheck())
+            {
+                FallSpeed(gravity);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         protected virtual bool Falling(float velocity)

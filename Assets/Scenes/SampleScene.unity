@@ -444,8 +444,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246504037}
   m_LocalRotation: {x: -0, y: -0, z: -0.7038364, w: 0.7103622}
-  m_LocalPosition: {x: 20.87, y: 0.49, z: 0}
-  m_LocalScale: {x: 9.1371765, y: 1, z: 1}
+  m_LocalPosition: {x: 20.8, y: 10.6, z: 0}
+  m_LocalScale: {x: 31.003681, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -636,8 +636,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014690753}
   m_LocalRotation: {x: -0, y: -0, z: -0.7038364, w: 0.7103622}
-  m_LocalPosition: {x: -20.88, y: 0.1, z: 0}
-  m_LocalScale: {x: 9.1371765, y: 1, z: 1}
+  m_LocalPosition: {x: -21, y: 10, z: 0}
+  m_LocalScale: {x: 30.135908, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -663,6 +663,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallSliding: 0
 --- !u!114 &5078455018543413845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +680,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallSliding: 0
   colliderMultiplier: 0.5
   layers:
     serializedVersion: 2
@@ -699,6 +701,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallSliding: 0
   dashForce: 150
   dashCoolDownTime: 3
   dashAmountTime: 0.5
@@ -741,6 +744,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: wallJumpTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: limitAirJumps
       value: 1
       objectReference: {fileID: 0}
@@ -759,6 +766,14 @@ PrefabInstance:
     - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: collisionLayer.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: verticalWallJumpForce
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -3188341386693575443, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
+      propertyPath: horizontalWallJumpForce
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -2418840122560609797, guid: 869726fe94768aa4b981d5775e86862e, type: 3}
       propertyPath: crouchSpeedMultiplier

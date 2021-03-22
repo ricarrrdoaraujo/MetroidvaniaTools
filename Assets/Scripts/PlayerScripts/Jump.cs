@@ -157,7 +157,6 @@ namespace MetroidvaniaTools
                 {
                     rb.AddForce(Vector2.right * horizontalWallJumpForce);
                 }
-
                 StartCoroutine(WallJumped());
             }
         }

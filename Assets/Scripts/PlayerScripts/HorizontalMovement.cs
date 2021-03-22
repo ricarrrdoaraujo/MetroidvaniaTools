@@ -110,9 +110,14 @@ namespace MetroidvaniaTools
             {
                 currentSpeed *= sprintMultiplier;
             }
-            else if (character.isCrouching)
+            if (character.isCrouching)
             {
                 currentSpeed *= crouchSpeedMultiplier;
+            }
+            if (!character.isFacingLeft && CollisionCheck(Vector2.right, .05f, jump.collisionLayer) ||
+                character.isFacingLeft && CollisionCheck(Vector2.left, .05f, jump.collisionLayer))
+            {
+                currentSpeed = .01f;
             }
         }
     }

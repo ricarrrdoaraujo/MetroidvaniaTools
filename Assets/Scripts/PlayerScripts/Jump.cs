@@ -25,6 +25,7 @@ namespace MetroidvaniaTools
 
         private bool isJumping;
         private bool isWallJumping;
+        private bool flipped;
         private float jumpCountDown;
         private float fallCountDown;
         private int numberOfJumpsLeft;
@@ -133,13 +134,25 @@ namespace MetroidvaniaTools
         {
             if (WallCheck())
             {
+                if (!flipped)
+                {
+                    Flip();
+                    flipped = true;
+                }
                 FallSpeed(gravity);
                 character.isWallSliding = true;
+                anim.SetBool("WallSliding", true);
                 return true;
             }
             else
             {
                 character.isWallSliding = false;
+                anim.SetBool("WallSliding", false);
+                if (flipped && !isWallJumping)
+                {
+                    Flip();
+                    flipped = false;
+                }
                 return false;
             }
         }

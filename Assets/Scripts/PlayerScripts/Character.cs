@@ -46,7 +46,7 @@ namespace MetroidvaniaTools
             {
                 transform.localScale = facingLeft;
             }
-            else
+            if (!isFacingLeft || (isFacingLeft && isWallSliding))
             {
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
             }

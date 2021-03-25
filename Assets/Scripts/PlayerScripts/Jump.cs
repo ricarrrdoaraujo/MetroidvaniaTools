@@ -40,13 +40,12 @@ namespace MetroidvaniaTools
 
         protected virtual void Update()
         {
-            JumpPressed();
-            JumpHeld();
+            CheckForJump();
         }
 
-        protected virtual bool JumpPressed()
+        protected virtual bool CheckForJump()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (input.JumpPressed())
             {
                 if (!character.isGrounded && numberOfJumpsLeft == maxJumps)
                 {
@@ -73,16 +72,6 @@ namespace MetroidvaniaTools
                     isJumping = true;
                     fallCountDown = glideTime;
                 }
-                return true;
-            }
-            else
-                return false;
-        }
-
-        protected virtual bool JumpHeld()
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
                 return true;
             }
             else
@@ -192,8 +181,6 @@ namespace MetroidvaniaTools
                 return false;
         }
 
-        
-
         protected virtual void IsJumping()
         {
             if (isJumping)
@@ -211,7 +198,7 @@ namespace MetroidvaniaTools
 
         protected virtual void Gliding()
         {
-            if (Falling(0) && JumpHeld())
+            if (Falling(0) && input.JumpHeld())
             {
                 fallCountDown -= Time.deltaTime;
                 if (fallCountDown > 0 && rb.velocity.y > acceptedFallSpeed)
@@ -226,7 +213,7 @@ namespace MetroidvaniaTools
 
         protected virtual void AdditionalAir()
         {
-            if (JumpHeld())
+            if (input.JumpHeld())
             {
                 jumpCountDown -= Time.deltaTime;
                 if (jumpCountDown <= 0)

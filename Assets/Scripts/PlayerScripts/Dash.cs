@@ -30,28 +30,22 @@ namespace MetroidvaniaTools
 
         protected virtual void Update()
         {
-            DashPressed();
+            Dashing();
         }
 
-        protected virtual bool DashPressed()
-        {
-            if (Input.GetKeyDown(KeyCode.Z) && canDash)
-            {
-                Dashing();
-                return true;
-            }
-            else
-                return false;
-        }
+
 
         protected virtual void Dashing()
         {
-            anim.SetBool("Dashing", true);
-            dashCountDown = dashCoolDownTime;
-            character.isDashing = true;
-            capsuleCollider2D.direction = CapsuleDirection2D.Horizontal;
-            capsuleCollider2D.size = dashCollider;
-            StartCoroutine(FinishedDashing());
+            if (input.DashPressed() && canDash)
+            {
+                anim.SetBool("Dashing", true);
+                dashCountDown = dashCoolDownTime;
+                character.isDashing = true;
+                capsuleCollider2D.direction = CapsuleDirection2D.Horizontal;
+                capsuleCollider2D.size = dashCollider;
+                StartCoroutine(FinishedDashing());
+            }
         }
 
         protected virtual void FixedUpdate()

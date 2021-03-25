@@ -23,6 +23,7 @@ namespace MetroidvaniaTools
         protected Animator anim;
         protected HorizontalMovement movement;
         protected Jump jump;
+        protected InputManager input;
 
         private Vector2 facingLeft;
         void Start()
@@ -37,6 +38,7 @@ namespace MetroidvaniaTools
             anim = GetComponent<Animator>();
             movement = GetComponent<HorizontalMovement>();
             jump = GetComponent<Jump>();
+            input = GetComponent<InputManager>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
 

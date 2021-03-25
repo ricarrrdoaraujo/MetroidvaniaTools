@@ -664,6 +664,22 @@ MonoBehaviour:
   isCrouching: 0
   isDashing: 0
   isWallSliding: 0
+--- !u!114 &5078455018543413837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078455018543413835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ea457a19a8c6746b41dc73bf521db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchHeld: 120
+  dashPressed: 122
+  sprintingHeld: 304
+  jump: 32
 --- !u!114 &5078455018543413845
 MonoBehaviour:
   m_ObjectHideFlags: 0

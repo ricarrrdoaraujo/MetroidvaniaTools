@@ -24,6 +24,7 @@ namespace MetroidvaniaTools
         protected HorizontalMovement movement;
         protected Jump jump;
         protected InputManager input;
+        protected ObjectPooler objectPooler;
 
         private Vector2 facingLeft;
         void Start()
@@ -39,6 +40,7 @@ namespace MetroidvaniaTools
             movement = GetComponent<HorizontalMovement>();
             jump = GetComponent<Jump>();
             input = GetComponent<InputManager>();
+            objectPooler = ObjectPooler.Instance;
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
 

@@ -680,6 +680,26 @@ MonoBehaviour:
   dashPressed: 122
   sprintingHeld: 304
   jump: 32
+  weaponFired: 8
+--- !u!114 &5078455018543413838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078455018543413835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046832144a364f43b1cac0fa620e567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFacingLeft: 0
+  isGrounded: 0
+  isCrouching: 0
+  isDashing: 0
+  isWallSliding: 0
+  weaponTypes:
+  - {fileID: 11400000, guid: 1e01c7851b7d43646a143aa08c155504, type: 2}
 --- !u!114 &5078455018543413845
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ namespace MetroidvaniaTools
         [SerializeField] protected KeyCode dashPressed;
         [SerializeField] protected KeyCode sprintingHeld;
         [SerializeField] protected KeyCode jump;
+        [SerializeField] protected KeyCode weaponFired;
         void Update()
         {
             CrouchHeld();
@@ -17,6 +18,7 @@ namespace MetroidvaniaTools
             SprintingHeld();
             JumpPressed();
             JumpHeld();
+            WeaponFired();
         }
         
         public virtual bool CrouchHeld()
@@ -61,6 +63,16 @@ namespace MetroidvaniaTools
         public virtual bool JumpPressed()
         {
             if (Input.GetKeyDown(jump))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public virtual bool WeaponFired()
+        {
+            if (Input.GetKeyDown(weaponFired))
             {
                 return true;
             }

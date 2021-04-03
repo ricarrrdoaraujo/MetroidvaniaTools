@@ -7,14 +7,47 @@ namespace MetroidvaniaTools
     public class Weapon : Abilities
     {
         [SerializeField] protected List<WeaponTypes> weaponTypes;
-
+        [SerializeField] protected Transform gunBarrel;
+        [SerializeField] protected Transform gunRotation;
+        
+        public List<GameObject> currentPool = new List<GameObject>();
+        public GameObject currentProjectile;
+        
+        private GameObject projectileParentFolder;
+        
         protected override void Initialization()
         {
             base.Initialization();
             foreach (WeaponTypes weapon in weaponTypes)
             {
-                objectPooler.CreatePool(weapon);
+                GameObject newPool = new GameObject();
+                projectileParentFolder = newPool;
+                objectPooler.CreatePool(weapon, currentPool, projectileParentFolder);
             }
+        }
+
+        protected virtual void Update()
+        {
+            if (input.WeaponFired())
+            {
+                FireWeapon();
+            }
+        }
+
+        protected virtual void FireWeapon()
+        {
+            currentProjectile = objectPooler.GetObject(currentPool);
+            if (currentProjectile != null)
+            {
+                Invoke("PlaceProjectile", .1f);
+            }
+        }
+
+        protected virtual void PlaceProjectile()
+        {
+            currentProjectile.transform.position = gunBarrel.position;
+            currentProjectile.transform.rotation = gunRotation.rotation;
+            currentProjectile.SetActive(true);
         }
     }
 }
